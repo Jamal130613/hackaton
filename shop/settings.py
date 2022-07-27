@@ -1,5 +1,7 @@
+
 from pathlib import Path
 from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,12 +28,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'rest_framework',
-    'rest_framework.authtoken',
     'drf_yasg',
+    'rest_framework.authtoken',
+    #apps
     'applications.account',
     'applications.product',
     'applications.cart'
+
 ]
 
 MIDDLEWARE = [
@@ -126,7 +132,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'account.CustomUser'
+
+# AUTH_USER_MODEL = 'account.CustomUser'
+
+
+# AUTH_USER_MODEL = 'account.CustomUser'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -152,3 +163,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
+
