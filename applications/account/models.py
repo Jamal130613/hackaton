@@ -4,7 +4,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
 
-    def _create_user(self, username, email, password, **extra_fields):
+    def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("The given email must be set")
         email = self.normalize_email(email)
@@ -58,4 +58,3 @@ class CustomUser(AbstractUser):
         import uuid
         code = str(uuid.uuid4())
         self.activation_code = code
-        
