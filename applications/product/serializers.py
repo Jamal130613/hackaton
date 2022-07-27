@@ -1,10 +1,7 @@
 from rest_framework import serializers
-
 from applications.product.models import Category
-
 from applications.product.models import Product
-
-from applications.product.models import Comment
+from applications.product.models import Review
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -19,16 +16,16 @@ class CategorySerializer(serializers.ModelSerializer):
             representation.pop('parent')
         return representation
 
-class CommentSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.email')
 
     class Meta:
-        model = Comment
+        model = Review
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.email')
-    отзывы = CommentSerializer(many=True,read_only=True)
+    отзывы = ReviewSerializer(many=True,read_only=True)
 
     class Meta:
         model = Product

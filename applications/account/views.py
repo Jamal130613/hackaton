@@ -17,7 +17,7 @@ class RegisterView(APIView):
 
         if serializers.is_valid(raise_exception=True):
             serializers.save()
-            message = f'Вы успешно зарегестрировались!Вам отпправлено письмо на почту.'
+            message = f'Вы успешно зарегестрировались!Вам отправлено письмо на почту.'
             return Response(message, status=201)
 
 

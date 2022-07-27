@@ -48,7 +48,8 @@ class Product(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to='products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
-                                related_name='images')
+                                related_name='images',
+                                verbose_name='images')
 
 
 class Like(models.Model):
@@ -65,17 +66,17 @@ class Like(models.Model):
     def __str__(self):
         return f'{self.product} {self.like}'
 
-class Comment(models.Model):
+class Review(models.Model):
     owner = models.ForeignKey(User,
                               on_delete=models.CASCADE,
-                              related_name='отзывы',
-                              verbose_name='отзыв')
+                              related_name='reviews',
+                              verbose_name='reviews')
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
-                                related_name='отзывы')
+                                related_name='reviews')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Отзыв от  {self.owner} на товар -{self.product}'
+        return f'Отзыв от {self.owner} на товар -{self.product}'
 

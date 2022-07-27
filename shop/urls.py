@@ -7,7 +7,7 @@ from drf_yasg.views import get_schema_view
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Bookingem',
+        title='Эрудит',
         default_version='v1',
         description='Для всех любителей читать!'
     ),

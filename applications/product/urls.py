@@ -5,11 +5,11 @@ from applications.product.views import CategoryView
 
 from applications.product.views import ProductView
 
-from applications.product.views import CommentView
+from applications.product.views import ReviewView
 
 router = DefaultRouter()
 router.register('category', CategoryView)
-router.register('comment', CommentView)
+router.register('comment', ReviewView)
 router.register('',ProductView)
 
 
