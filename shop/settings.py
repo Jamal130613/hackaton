@@ -1,7 +1,8 @@
 
-
 from pathlib import Path
 from decouple import config
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,13 +29,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'rest_framework',
     'drf_yasg',
     'rest_framework.authtoken',
     #apps
     'applications.account',
-    'applications.cart',
     'applications.product',
+    'applications.cart'
+
 ]
 
 MIDDLEWARE = [
@@ -124,6 +127,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# AUTH_USER_MODEL = 'account.CustomUser'
+
+
 # AUTH_USER_MODEL = 'account.CustomUser'
 
 
@@ -134,4 +141,14 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 
+
+# SWAGGER_SETTINGS = {
+#     'SECURITY_DEFINITIONS': {
+#         'api_key': {
+#             'type': 'apiKey',
+#             'in': 'header',
+#             'name': 'Authorization'
+#         }
+#     }
+# }
 
