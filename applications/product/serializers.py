@@ -37,7 +37,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
     images = ImageSerializer(many=True, read_only=True)
-    reviews = CommentSerializer(many=True,read_only=True)
+    reviews = ReviewSerializer(many=True,read_only=True)
 
     class Meta:
         model = Product
@@ -58,13 +58,3 @@ class ProductSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['likes'] = instance.likes.filter(like=True).count()
         return representation
-
-
-
-class ImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Image
-        fields = '__all__'
-
-
