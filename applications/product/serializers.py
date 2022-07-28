@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from applications.product.models import Category
+from applications.product.models import Category, Image
 from applications.product.models import Product
 from applications.product.models import Review
 
@@ -25,7 +25,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.email')
-    отзывы = ReviewSerializer(many=True,read_only=True)
+    reviews = ReviewSerializer(many=True,read_only=True)
 
     class Meta:
         model = Product
@@ -41,5 +41,12 @@ class ProductSerializer(serializers.ModelSerializer):
         representation['likes'] = instance.likes.filter(like=True).count()
         return representation
 
+
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Image
+        fields = '__all__'
 
 
