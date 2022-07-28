@@ -20,8 +20,9 @@ class RegisterView(APIView):
 
         if serializers.is_valid(raise_exception=True):
             serializers.save()
-            message = f'Вы успешно зарегистрированы. \n Вам отправлено письмо с активацией'
-            return Response(message,status=201)
+
+            message = f'Вы успешно зарегестрировались!Вам отправлено письмо на почту.'
+            return Response(message, status=201)
 
 class ActivationView(APIView):
     def get(self,request,activation_code):
