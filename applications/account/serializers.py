@@ -22,7 +22,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Пароли не совпадают!!')
 
         return attrs
-    
+
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         code = user.activation_code
