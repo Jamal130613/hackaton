@@ -1,10 +1,12 @@
 from django.contrib import admin
-from applications.product.models import Category, Like, Product, Review, Image
+from applications.product.models import Category, Product ,Like , Review , Image
+
 
 admin.site.register(Category)
 admin.site.register(Like)
 admin.site.register(Review)
 admin.site.register(Image)
+
 
 
 class ImageInAdmin(admin.TabularInline):
@@ -15,6 +17,7 @@ class ImageInAdmin(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
-    search_fields = ['description', 'name']
+    search_fields = ['price', 'name']
+
 
 admin.site.register(Product, ProductAdmin)

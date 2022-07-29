@@ -12,7 +12,7 @@ from applications.product.models import Image
 
 router = DefaultRouter()
 router.register('category', CategoryView)
-router.register('comment', ReviewView)
+router.register('review', ReviewView)
 router.register('',ProductView)
 
 
