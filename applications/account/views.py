@@ -13,15 +13,14 @@ from applications.account.serializers import RegisterSerializer, LoginSerializer
 
 User = get_user_model()
 
-
+#
 class RegisterView(APIView):
-    def post(self,request):
+ def post(self,request):
         data = request.data
         serializers = RegisterSerializer(data=data)
 
         if serializers.is_valid(raise_exception=True):
             serializers.save()
-
             message = f'Вы успешно зарегестрировались!Вам отправлено письмо на почту.'
             return Response(message, status=201)
 
@@ -70,14 +69,9 @@ class ForgotPasswordView(APIView):
         return Response('Мы отправили вам на почту письмо для восстановления вашего пароля.')
 
 class ForgotPasswordComplete(APIView):
-     def post(self, request):
-            data = request.data
-            serializer = ForgotPasswordCompleteSerializer(data=data)
-        try:
-            user = request.user
-            Token, object.filter(user=user).delete()
-            return Response('Вы успешно вышли!')
-        except:
-            return Response(status = 403)
+    def post(self, request):
+        data = request.data
+        serializer = ForgotPasswordCompleteSerializer(data=data)
+
 
 

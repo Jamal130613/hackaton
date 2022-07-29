@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self,  email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active",True)
@@ -33,12 +33,12 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     activation_code = models.CharField(max_length=50,blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
+    username = None
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -52,7 +52,6 @@ class CustomUser(AbstractUser):
         import uuid
         code = str(uuid.uuid4())
         self.activation_code = code
-
 
     def generate_activation_code(self):
         import uuid
