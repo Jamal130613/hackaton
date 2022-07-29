@@ -58,7 +58,7 @@ class LogOutView(APIView):
     def post(self,request):
         user = request.user
         Token.objects.filter(user=user).delete()
-        return Response('Успешно вышли с аккаунта ;)')
+        return Response('Успешно вышли из аккаунта!')
 
 
 class ForgotPasswordView(APIView):
@@ -70,14 +70,9 @@ class ForgotPasswordView(APIView):
         return Response('Мы отправили вам на почту письмо для восстановления вашего пароля.')
 
 class ForgotPasswordComplete(APIView):
-     def post(self, request):
+    def post(self, request):
             data = request.data
             serializer = ForgotPasswordCompleteSerializer(data=data)
-        try:
-            user = request.user
-            Token, object.filter(user=user).delete()
-            return Response('Вы успешно вышли!')
-        except:
-            return Response(status = 403)
+
 
 
