@@ -15,6 +15,6 @@ class ImageInAdmin(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
-    search_fields = ['price', 'name']
+    search_fields = ['description', 'name']
 
 admin.site.register(Product, ProductAdmin)
