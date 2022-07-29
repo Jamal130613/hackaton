@@ -5,11 +5,11 @@ from django.db import models
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, username, email, password, **extra_fields):
+    def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("The given email must be set")
         email = self.normalize_email(email)
-        user = self.model(email=email, username=username, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.create_activation_code()
         user.save(using=self._db)
@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self,  email, password, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active",True)
@@ -38,7 +38,6 @@ class CustomUser(AbstractUser):
     password = models.CharField(max_length=100)
     activation_code = models.CharField(max_length=50,blank=True)
     is_active = models.BooleanField(default=True)
-    username = None
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
