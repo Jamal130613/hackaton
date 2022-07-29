@@ -3,7 +3,6 @@ from applications.product.models import Category, Image
 from applications.product.models import Product
 from applications.product.models import Review
 
-from applications.product.models import Image
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -20,7 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    # owner = serializers.ReadOnlyField(source='owner.email')
+    owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
         model = Review
         fields = '__all__'
@@ -37,7 +36,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
     images = ImageSerializer(many=True, read_only=True)
-    reviews = CommentSerializer(many=True,read_only=True)
+    reviews = ReviewSerializer(many=True,read_only=True)
 
     class Meta:
         model = Product
@@ -61,10 +60,5 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
-class ImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Image
-        fields = '__all__'
 
 

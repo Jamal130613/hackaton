@@ -97,3 +97,34 @@ class ForgotPasswordSerializer(serializers.Serializer):
             'jamalaskarovaa@gmail.com',
             [email]
         )
+
+class ForgotPasswordCompleteSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    code = serializers.CharField(min_length=8, max_length=8, required=True)
+    password = serializers.CharField(required=True)
+    password_confirm = serializers.CharField(required=True)
+
+    def validate_email(self, email):
+        if not User.objects.filter(email=email).exists():
+            raise serializers.ValidationError('Пользователь не зарегистрирован')
+        return email
+
+    def validate_code(self, code):
+        if not User.objects.filter(activation_code=code).exists():
+            raise serializers.ValidationError('Пользователь не зарегистрирован')
+        return code
+
+    def validate(self, attrs):
+        pass1 = attrs.get('password')
+        pass2 = attrs.get('password_confirm')
+        if pass1 != pass2:
+            raise serializers.ValidationError('Пароли не совпадают')
+        return attrs
+
+    def set_new_pass(self):
+        email = self.validated_data.get('email')
+        password = self.validated_data.get('password')
+        user = User.objects.get(email=email)
+        user.set_password(password)
+        user.activation_code = ''
+        user.save()

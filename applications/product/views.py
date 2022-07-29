@@ -23,9 +23,20 @@ class ProductView(ModelViewSet):
     serializer_class = ProductSerializer
     search_fields = ['name', 'description']
     ordering_fields = ['price']
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+
+    @action(detail=False, methods=['GET'])
+    def my_products(self,request,pk=None):
+        queryset = self.get_queryset()
+        queryset=queryset.filter(owner=request.user)
+        serializer=ProductSerializer(queryset,many=True)
+        return Response(serializer.data,status=200)
+
 
     @action(methods=['POST'], detail=True)
     def like(self,request, pk, *args, **kwargs):
