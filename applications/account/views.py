@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -8,7 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 from applications.account.serializers import RegisterSerializer, LoginSerializer, ChangePasswordSerializer, ForgotPasswordSerializer,  ForgotPasswordCompleteSerializer
+
+
 
 User = get_user_model()
 
@@ -48,20 +49,13 @@ class ChangePasswordView(APIView):
 
         serializers.is_valid(raise_exception=True)
         serializers.set_new_password()
-        return Response('Вы сменили пароль')
+        return Response('Пароль успешно обновлён!')
 
 
 class LogOutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self,request):
-        # try:
-        #     user = request.user
-        #     Token.object.filter(user=user).delete()
-        #     return Response('Вы успешно вышли')
-        # except:
-        #     return Response(status = 403)
-        # #
         user = request.user
         Token.objects.filter(user=user).delete()
         return Response('Успешно вышли с аккаунта ;)')
@@ -79,3 +73,11 @@ class ForgotPasswordComplete(APIView):
      def post(self, request):
             data = request.data
             serializer = ForgotPasswordCompleteSerializer(data=data)
+        try:
+            user = request.user
+            Token, object.filter(user=user).delete()
+            return Response('Вы успешно вышли!')
+        except:
+            return Response(status = 403)
+
+

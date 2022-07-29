@@ -59,6 +59,3 @@ class ProductSerializer(serializers.ModelSerializer):
         return representation
 
 
-
-
-

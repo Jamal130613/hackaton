@@ -1,12 +1,11 @@
 from django.contrib import admin
 from applications.product.models import Category, Product ,Like , Review , Image
 
+
 admin.site.register(Category)
-# admin.site.register(Product)
 admin.site.register(Like)
 admin.site.register(Review)
 admin.site.register(Image)
-
 
 
 
@@ -15,8 +14,10 @@ class ImageInAdmin(admin.TabularInline):
     fields = ['image']
     max_num = 5
 
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'category']
     search_fields = ['price', 'name']
+
 
 admin.site.register(Product, ProductAdmin)

@@ -31,6 +31,7 @@ class Product(models.Model):
                               on_delete=models.CASCADE,
                               related_name='products')
     name = models.CharField(max_length=50)
+    author = models.CharField(max_length=50)
     description = models.TextField(null=True,blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     amount = models.PositiveIntegerField(default=1)
